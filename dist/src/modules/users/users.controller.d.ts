@@ -1,0 +1,90 @@
+import { CurrentUserData } from '../../common/decorators/current-user.decorator';
+import { QueryUsersDto } from './dto/query-users.dto';
+import { CreateMunicipalUserDto } from './dto/create-municipal-user.dto';
+import { UpdateProfileDto } from './dto/update-profile.dto';
+import { UpdateUserRoleDto } from './dto/update-user-role.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { UsersService } from './users.service';
+export declare class UsersController {
+    private readonly usersService;
+    constructor(usersService: UsersService);
+    getProfile(user: CurrentUserData): Promise<Omit<{
+        id: string;
+        email: string;
+        firstName: string;
+        lastName: string;
+        password: string;
+        phone: string | null;
+        address: string | null;
+        avatar: string | null;
+        role: import(".prisma/client").$Enums.Role;
+        createdAt: Date;
+        updatedAt: Date;
+    }, "password">>;
+    updateProfile(user: CurrentUserData, dto: UpdateProfileDto): Promise<Omit<{
+        id: string;
+        email: string;
+        firstName: string;
+        lastName: string;
+        password: string;
+        phone: string | null;
+        address: string | null;
+        avatar: string | null;
+        role: import(".prisma/client").$Enums.Role;
+        createdAt: Date;
+        updatedAt: Date;
+    }, "password">>;
+    findAll(query: QueryUsersDto): Promise<import("../../common/pagination/paginated-response").PaginatedResponse<unknown>>;
+    createMunicipal(dto: CreateMunicipalUserDto): Promise<Omit<{
+        id: string;
+        email: string;
+        firstName: string;
+        lastName: string;
+        password: string;
+        phone: string | null;
+        address: string | null;
+        avatar: string | null;
+        role: import(".prisma/client").$Enums.Role;
+        createdAt: Date;
+        updatedAt: Date;
+    }, "password">>;
+    updateRole(id: string, dto: UpdateUserRoleDto): Promise<Omit<{
+        id: string;
+        email: string;
+        firstName: string;
+        lastName: string;
+        password: string;
+        phone: string | null;
+        address: string | null;
+        avatar: string | null;
+        role: import(".prisma/client").$Enums.Role;
+        createdAt: Date;
+        updatedAt: Date;
+    }, "password">>;
+    updateUser(id: string, dto: UpdateUserDto): Promise<Omit<{
+        id: string;
+        email: string;
+        firstName: string;
+        lastName: string;
+        password: string;
+        phone: string | null;
+        address: string | null;
+        avatar: string | null;
+        role: import(".prisma/client").$Enums.Role;
+        createdAt: Date;
+        updatedAt: Date;
+    }, "password">>;
+    removeUser(user: CurrentUserData, id: string): Promise<Omit<{
+        id: string;
+        email: string;
+        firstName: string;
+        lastName: string;
+        password: string;
+        phone: string | null;
+        address: string | null;
+        avatar: string | null;
+        role: import(".prisma/client").$Enums.Role;
+        createdAt: Date;
+        updatedAt: Date;
+    }, "password">>;
+}
