@@ -52,12 +52,14 @@ function buildAllowedOrigins(appUrl) {
     const defaults = [
         'http://localhost:5173',
         'https://dakar-scholarship-hub-mains.vercel.app',
+        'https://dakar-scholarship-hub-front.vercel.app',
     ];
+    const normalizeOrigin = (origin) => origin.trim().replace(/\/+$/, '');
     const configured = (appUrl ?? '')
         .split(',')
-        .map((origin) => origin.trim())
+        .map(normalizeOrigin)
         .filter(Boolean);
-    return Array.from(new Set([...defaults, ...configured]));
+    return Array.from(new Set([...defaults.map(normalizeOrigin), ...configured]));
 }
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule, { cors: false });
@@ -71,7 +73,8 @@ async function bootstrap() {
     const allowedOrigins = buildAllowedOrigins(configService.get('app.appUrl'));
     app.enableCors({
         origin: (origin, callback) => {
-            if (!origin || allowedOrigins.includes(origin)) {
+            const normalizedOrigin = origin?.replace(/\/+$/, '');
+            if (!normalizedOrigin || allowedOrigins.includes(normalizedOrigin)) {
                 callback(null, true);
                 return;
             }
